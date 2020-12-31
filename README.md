@@ -1,4 +1,4 @@
-# tools
+# 前端工具箱
 
 > 把面试题、常用资料导航装到VSCode里，更方便查找！
 
@@ -11,6 +11,6 @@
 - 内置常见**面试题库**
 - 常用工具箱及开发文档
 
-![](./resources/screenshot.png)
+![](https://poetries1.gitee.io/img-repo/2020/12/screenshot.png)
 
 Enjoy!
