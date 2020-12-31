@@ -1,0 +1,100 @@
+{
+    "name": "interview",
+    "displayName": "前端面试",
+    "description": "把面试题装进vscode里",
+    "version": "0.0.1",
+    "icon": "resources/icon.png",
+    "license": "GPL",
+    "publisher": "poetries",
+    "repository": {
+        "url": "https://github.com/poetries/FE-Interview-Questions"
+    },
+    "keywords": [
+        "interview",
+        "面试",
+        "前端面试",
+        "前端",
+        "前端开发",
+        "fe",
+        "面试题"
+    ],
+    "engines": {
+        "vscode": "^1.35.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onView:feinterview_site",
+        "onView:feinterview_tools",
+        "onView:feinterview_docs",
+        "onView:feinterview_setting"
+    ],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "feinterview.addTools",
+                "title": "更多工具",
+                "icon": "resources/icon_appadd.svg"
+            }
+        ],
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "feinterview",
+                    "title": "前端面试",
+                    "icon": "resources/icon_fe.svg"
+                }
+            ]
+        },
+        "views": {
+            "feinterview": [
+                {
+                    "id": "feinterview_site",
+                    "name": "快捷导航"
+                },
+                {
+                    "id": "feinterview_docs",
+                    "name": "文档查询"
+                },
+                {
+                    "id": "feinterview_tools",
+                    "name": "常用工具"
+                },
+                {
+                    "id": "feinterview_setting",
+                    "name": "关于我们"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "feinterview.addTools",
+                    "when": "view == feinterview_tools",
+                    "group": "navigation@1"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "yarn run lint",
+        "test": "node ./test/runTest.js"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.0.0",
+        "@types/node": "^14.0.27",
+        "@types/vscode": "^1.35.0",
+        "eslint": "^7.6.0",
+        "glob": "^7.1.6",
+        "mocha": "^8.0.1",
+        "typescript": "^3.8.3",
+        "vscode-test": "^1.4.0"
+    },
+    "dependencies": {
+        "axios": "^0.21.1"
+    }
+}
