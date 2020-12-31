@@ -1,5 +1,7 @@
 # tools
 
-> 把面试题、常用资料导航塞到VSCode里，并添加了更多乐趣！
+> 把面试题、常用资料导航装到VSCode里，更方便查找！
+
+![](./resources/screenshot.png)
 
 **Enjoy!**
