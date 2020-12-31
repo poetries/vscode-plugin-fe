@@ -4,6 +4,7 @@ const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
 const CategoryTree = require('./src/navTree');
+const BlogTree = require("./src/blogTree");
 const ToolsTree = require("./src/toolsTree");
 const DocsTree = require("./src/docsTree");
 const SettingTree = require("./src/settingTree");
@@ -32,6 +33,9 @@ function activate(ctx) {
 
 	const settingTree = new SettingTree(context);
 	vscode.window.registerTreeDataProvider("feinterview_setting", settingTree);
+
+	const blogTree = new BlogTree(context);
+	vscode.window.registerTreeDataProvider("feinterview_blog", blogTree);
 
 	const toolsTree = new ToolsTree(context);
 	vscode.window.registerTreeDataProvider("feinterview_tools", toolsTree);

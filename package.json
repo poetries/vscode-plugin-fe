@@ -1,5 +1,5 @@
 {
-    "name": "fe-interview",
+    "name": "fe-tools",
     "displayName": "前端工具箱",
     "description": "把面试题、常用工具装进vscode里",
     "version": "0.0.1",
@@ -7,7 +7,7 @@
     "license": "GPL",
     "publisher": "poetries",
     "repository": {
-        "url": "https://github.com/poetries/FE-Interview-Questions"
+        "url": "https://github.com/poetries/vscode-plugin-fe.git"
     },
     "keywords": [
         "interview",
@@ -17,7 +17,11 @@
         "前端开发",
         "fe",
         "面试题",
-        "工具箱"
+        "前端学习",
+        "工具箱",
+        "博客",
+        "公众号",
+        "RSS"
     ],
     "engines": {
         "vscode": "^1.35.0"
@@ -27,6 +31,7 @@
     ],
     "activationEvents": [
         "onView:feinterview_site",
+        "onView:feinterview_blog",
         "onView:feinterview_tools",
         "onView:feinterview_docs",
         "onView:feinterview_setting"
@@ -54,6 +59,10 @@
                 {
                     "id": "feinterview_site",
                     "name": "快捷导航"
+                },
+                {
+                    "id": "feinterview_blog",
+                    "name": "前端资讯"
                 },
                 {
                     "id": "feinterview_docs",
