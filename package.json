@@ -1,7 +1,7 @@
 {
-    "name": "interview",
-    "displayName": "前端面试",
-    "description": "把面试题装进vscode里",
+    "name": "fe-interview",
+    "displayName": "前端工具箱",
+    "description": "把面试题、常用工具装进vscode里",
     "version": "0.0.1",
     "icon": "resources/icon.png",
     "license": "GPL",
@@ -16,7 +16,8 @@
         "前端",
         "前端开发",
         "fe",
-        "面试题"
+        "面试题",
+        "工具箱"
     ],
     "engines": {
         "vscode": "^1.35.0"
