@@ -7,8 +7,11 @@ const CategoryTree = require('./src/navTree');
 const BlogTree = require("./src/blogTree");
 const ToolsTree = require("./src/toolsTree");
 const DocsTree = require("./src/docsTree");
+const CollectTree = require("./src/collectTree");
 const SettingTree = require("./src/settingTree");
 const { default: axios } = require('axios');
+const globalState = require('./src/globalState');
+const BaseConfig = require('./src/baseConfig');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -28,28 +31,67 @@ function activate(ctx) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	const categoryTree = new CategoryTree(context);
-	vscode.window.registerTreeDataProvider("feinterview_site", categoryTree);
+	vscode.window.registerTreeDataProvider("feinterview_site", new CategoryTree(context));
+	vscode.window.registerTreeDataProvider("feinterview_setting", new SettingTree(context));
+	vscode.window.registerTreeDataProvider("feinterview_blog", new BlogTree(context));
+	vscode.window.registerTreeDataProvider("feinterview_tools", new ToolsTree(context));
+	vscode.window.registerTreeDataProvider("feinterview_docs", new DocsTree(context));
+	const collectTree = new CollectTree(context)
+	vscode.window.registerTreeDataProvider("feinterview_collect", collectTree);
 
-	const settingTree = new SettingTree(context);
-	vscode.window.registerTreeDataProvider("feinterview_setting", settingTree);
-
-	const blogTree = new BlogTree(context);
-	vscode.window.registerTreeDataProvider("feinterview_blog", blogTree);
-
-	const toolsTree = new ToolsTree(context);
-	vscode.window.registerTreeDataProvider("feinterview_tools", toolsTree);
-
-	const docsTree = new DocsTree(context);
-	vscode.window.registerTreeDataProvider("feinterview_docs", docsTree);
-
-	let openSite = vscode.commands.registerCommand('feinterview.openSite', openInWebview);
-	context.subscriptions.push(openSite);
-
-	let addTools = vscode.commands.registerCommand('feinterview.addTools', function () {
-		console.log('addTools');
-		vscode.env.openExternal("https://github.com/poetries/mywiki/tree/master/bookmark");
+	globalState.events.addListener('refresh-view', (type) => {
+		console.log(type,'----type----')
+		if (type === 'collect') {
+      collectTree.refresh();
+    }
 	});
+	
+	context.subscriptions.push(
+		vscode.commands.registerCommand('feinterview.addTools', function () {
+			console.log('addTools');
+			vscode.env.openExternal("https://github.com/poetries/mywiki/tree/master/bookmark");
+		}),
+		vscode.commands.registerCommand('feinterview.openSite', openInWebview),
+		vscode.commands.registerCommand('feinterview.deleteCollect', ({id})=> {
+			BaseConfig.removeConfig('frontend-box.markbook', id).then(() => {
+        globalState.events.emit('refresh-view', 'collect');
+      });
+		}),
+		vscode.commands.registerCommand('feinterview.addCollect', (title, url) => {
+			console.log(title,url)
+      vscode.window
+        .showInputBox({
+          placeHolder: '第一步：输入名称',
+        })
+        .then(title => {
+          if (!title) {
+            return;
+          }
+          console.log(title);
+          vscode.window
+            .showInputBox({
+              placeHolder: '第二步：填写网址url',
+            })
+            .then(url => {
+              console.log(url);
+              if (!url) {
+                return;
+              }
+              if (/^(http|https)/.test(url) !== true) {
+                vscode.window.showErrorMessage(
+                  '添加失败，URL 必须是 http 或 https 开头'
+                );
+                return;
+              }
+              BaseConfig.updateConfig('frontend-box.markbook', [
+                { title, url },
+              ]).then(() => {
+                globalState.events.emit('refresh-view', 'collect');
+              });
+            });
+        });
+    })
+	);
 }
 
 function openInWebview(params) {

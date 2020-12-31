@@ -34,6 +34,7 @@
         "onView:feinterview_blog",
         "onView:feinterview_tools",
         "onView:feinterview_docs",
+        "onView:feinterview_collect",
         "onView:feinterview_setting"
     ],
     "main": "./extension.js",
@@ -43,13 +44,29 @@
                 "command": "feinterview.addTools",
                 "title": "更多工具",
                 "icon": "resources/icon_appadd.svg"
+            },
+            {
+                "command": "feinterview.addCollect",
+                "title": "添加网址",
+                "icon": {
+                    "light": "resources/light/add.svg",
+                    "dark": "resources/dark/add.svg"
+                }
+            },
+            {
+                "command": "feinterview.deleteCollect",
+                "title": "删除网址",
+                "icon": {
+                    "light": "resources/light/del.svg",
+                    "dark": "resources/dark/del.svg"
+                }
             }
         ],
         "viewsContainers": {
             "activitybar": [
                 {
                     "id": "feinterview",
-                    "title": "前端面试",
+                    "title": "前端工具箱",
                     "icon": "resources/icon_fe.svg"
                 }
             ]
@@ -73,6 +90,10 @@
                     "name": "常用工具"
                 },
                 {
+                    "id": "feinterview_collect",
+                    "name": "收藏夹"
+                },
+                {
                     "id": "feinterview_setting",
                     "name": "关于我们"
                 }
@@ -84,8 +105,47 @@
                     "command": "feinterview.addTools",
                     "when": "view == feinterview_tools",
                     "group": "navigation@1"
+                },
+                {
+                    "command": "feinterview.addCollect",
+                    "when": "view == feinterview_collect",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "feinterview.deleteCollect",
+                    "when": "view == feinterview_collect",
+                    "group": "group1"
+                },
+                {
+                    "command": "feinterview.deleteCollect",
+                    "when": "view == feinterview_collect",
+                    "group": "inline"
                 }
             ]
+        },
+        "configuration": {
+            "properties": {
+                "frontend-box.markbook": {
+                    "type": "array",
+                    "default": [
+                        {
+                            "title": "Web 技术周刊",
+                            "url": "https://www.yuque.com/awesome/fe_weekly"
+                        },
+                        {
+                            "title": "科技爱好者周刊",
+                            "url": "https://www.yuque.com/ruanyf/weekly"
+                        },
+                        {
+                            "title": "产品经理知识整理",
+                            "url": "https://www.yuque.com/weis/pm"
+                        }
+                    ],
+                    "description": "收藏网址"
+                }
+            }
         }
     },
     "scripts": {
@@ -105,6 +165,7 @@
         "vscode-test": "^1.4.0"
     },
     "dependencies": {
-        "axios": "^0.21.1"
+        "axios": "^0.21.1",
+        "events": "3.2.0"
     }
 }
