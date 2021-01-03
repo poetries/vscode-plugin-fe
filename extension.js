@@ -6,6 +6,8 @@ const fs = require('fs');
 const CategoryTree = require('./src/navTree');
 const BlogTree = require("./src/blogTree");
 const ToolsTree = require("./src/toolsTree");
+const BossTree = require("./src/bossTree");
+const TopicTree = require("./src/topicTree");
 const DocsTree = require("./src/docsTree");
 const CollectTree = require("./src/collectTree");
 const SettingTree = require("./src/settingTree");
@@ -35,9 +37,12 @@ function activate(ctx) {
 	vscode.window.registerTreeDataProvider("feinterview_setting", new SettingTree(context));
 	vscode.window.registerTreeDataProvider("feinterview_blog", new BlogTree(context));
 	vscode.window.registerTreeDataProvider("feinterview_tools", new ToolsTree(context));
+	vscode.window.registerTreeDataProvider("feinterview_boss", new BossTree(context));
 	vscode.window.registerTreeDataProvider("feinterview_docs", new DocsTree(context));
 	const collectTree = new CollectTree(context)
+	const topicTree = new TopicTree(context)
 	vscode.window.registerTreeDataProvider("feinterview_collect", collectTree);
+	vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
 
 	globalState.events.addListener('refresh-view', (type) => {
 		console.log(type,'----type----')
@@ -50,6 +55,11 @@ function activate(ctx) {
 		vscode.commands.registerCommand('feinterview.addTools', function () {
 			console.log('addTools');
 			vscode.env.openExternal("https://github.com/poetries/mywiki/tree/master/bookmark");
+		}),
+		vscode.commands.registerCommand('feinterview.refreshTopic', function () {
+			console.log('refresh');
+			topicTree.refresh();
+			vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
 		}),
 		vscode.commands.registerCommand('feinterview.openSite', openInWebview),
 		vscode.commands.registerCommand('feinterview.deleteCollect', ({id})=> {
@@ -113,7 +123,8 @@ function openInWebview(params) {
 
 	var webViewPanel = webViewStorage[target].panel;
 
-	if(!webViewPanel){
+	// 每次都打开新tab
+	if(true || !webViewPanel){
 		webViewPanel = vscode.window.createWebviewPanel(
 			'webview', // viewType
 			'', // 视图标题
@@ -132,6 +143,7 @@ function openInWebview(params) {
 		webViewPanel.webview.onDidReceiveMessage(
 			message => {
 				console.log("webview onDidReceiveMessage：",JSON.stringify(message));
+
 				switch (message.command) {
 					case 'alert':
 						vscode.window.showInformationMessage(message.text);
