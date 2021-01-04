@@ -8,6 +8,7 @@ const BlogTree = require("./src/blogTree");
 const ToolsTree = require("./src/toolsTree");
 const BossTree = require("./src/bossTree");
 const TopicTree = require("./src/topicTree");
+const QuestionTree = require("./src/questionTree");
 const DocsTree = require("./src/docsTree");
 const CollectTree = require("./src/collectTree");
 const SettingTree = require("./src/settingTree");
@@ -41,8 +42,10 @@ function activate(ctx) {
 	vscode.window.registerTreeDataProvider("feinterview_docs", new DocsTree(context));
 	const collectTree = new CollectTree(context)
 	const topicTree = new TopicTree(context)
+	const questionTree = new QuestionTree(context)
 	vscode.window.registerTreeDataProvider("feinterview_collect", collectTree);
 	vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
+	vscode.window.registerTreeDataProvider("feinterview_question", questionTree);
 
 	globalState.events.addListener('refresh-view', (type) => {
 		console.log(type,'----type----')
@@ -60,6 +63,11 @@ function activate(ctx) {
 			console.log('refresh');
 			topicTree.refresh();
 			vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
+		}),
+		vscode.commands.registerCommand('feinterview.refreshQuestion', function () {
+			console.log('refresh');
+			questionTree.refresh();
+			vscode.window.registerTreeDataProvider("feinterview_question", questionTree);
 		}),
 		vscode.commands.registerCommand('feinterview.openSite', openInWebview),
 		vscode.commands.registerCommand('feinterview.deleteCollect', ({id})=> {

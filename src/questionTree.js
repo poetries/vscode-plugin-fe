@@ -5,7 +5,7 @@ const axios = require("axios");
 
 var lastTimestamp;
 var r_data;
-class TopicTree {
+class questionTree {
     constructor(context){
         this.context = context;
         this.page = 1
@@ -21,22 +21,22 @@ class TopicTree {
         return element;
     }
     async getChildren(element) {
-        const {data: {zpData:{topicList,hasMore}}} = await axios.get(`https://www.zhipin.com/wapi/moment/discover/recHotTopic?page=${this.page}`);
-        r_data = topicList;
+        const {data: {zpData:{list,hasMore}}} = await axios.get(`https://www.zhipin.com/wapi/moment/get/question/wait2AnswerList?page=${this.page}&pageSize=30`);
+        r_data = list;
         if(!hasMore) {
             this.page = 1
         }
         if(!r_data)r_data=[];
-        var a_length = 4;
+        var a_length = 30;
         var fin_items = [];
         for(var i = 0;i<a_length;i++){
             var item = r_data[i];
             fin_items.push(
                 new DataItem(
-                    item.topicName,
+                    item.content || '',
                     '',
                     {
-                        command:"feinterview.openSite",title:"",arguments:[{url:"http://boss-interview.poetries.top?topicId="+item.formId,title:item.topicName,icon: 'icon_topic.svg'}]
+                        command:"feinterview.openSite",title:"",arguments:[{url:"http://boss-interview.poetries.top/question-detail?questionId="+item.questionId,title:item.content || '',icon: 'icon_question.svg'}]
                     }
                 )
             );
@@ -50,9 +50,9 @@ class DataItem extends vscode.TreeItem{
     constructor(label, tooltip, command) {
         super(label,  vscode.TreeItemCollapsibleState.None);
         this.tooltip = tooltip;
-        this.iconPath = path.join(__filename,'../../','resources', 'icon_topic.svg');
+        this.iconPath = path.join(__filename,'../../','resources', 'icon_question.svg');
         this.command = command;
     }
 }
 
-module.exports = TopicTree;
+module.exports = questionTree;

@@ -2,7 +2,7 @@
     "name": "fe-tools",
     "displayName": "前端工具箱",
     "description": "把面试题、常用工具装进vscode里",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "icon": "resources/icon.png",
     "license": "GPL",
     "publisher": "poetries",
@@ -16,11 +16,20 @@
         "前端",
         "前端开发",
         "fe",
+        "front end",
         "面试题",
         "前端学习",
+        "工具",
         "工具箱",
         "博客",
         "公众号",
+        "职场",
+        "求职",
+        "boss",
+        "node",
+        "taro",
+        "webpack",
+        "nginx",
         "RSS"
     ],
     "engines": {
@@ -36,6 +45,7 @@
         "onView:feinterview_docs",
         "onView:feinterview_boss",
         "onView:feinterview_topic",
+        "onView:feinterview_question",
         "onView:feinterview_collect",
         "onView:feinterview_setting"
     ],
@@ -49,6 +59,11 @@
             },
             {
                 "command": "feinterview.refreshTopic",
+                "title": "换一批",
+                "icon": "resources/icon_refresh.svg"
+            },
+            {
+                "command": "feinterview.refreshQuestion",
                 "title": "换一批",
                 "icon": "resources/icon_refresh.svg"
             },
@@ -98,7 +113,11 @@
                 },
                 {
                     "id": "feinterview_topic",
-                    "name": "求职助手"
+                    "name": "热门话题"
+                },
+                {
+                    "id": "feinterview_question",
+                    "name": "问题广场"
                 },
                 {
                     "id": "feinterview_tools",
@@ -124,6 +143,11 @@
                 {
                     "command": "feinterview.refreshTopic",
                     "when": "view == feinterview_topic",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "feinterview.refreshQuestion",
+                    "when": "view == feinterview_question",
                     "group": "navigation@1"
                 },
                 {
