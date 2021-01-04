@@ -2,7 +2,7 @@
     "name": "fe-tools",
     "displayName": "前端工具箱",
     "description": "把面试题、常用工具装进vscode里",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "icon": "resources/icon.png",
     "license": "GPL",
     "publisher": "poetries",
