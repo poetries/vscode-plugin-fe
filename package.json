@@ -2,7 +2,7 @@
     "name": "fe-tools",
     "displayName": "前端工具箱",
     "description": "把面试题、常用工具装进vscode里",
-    "version": "0.0.5",
+    "version": "0.0.7",
     "icon": "resources/icon.png",
     "license": "GPL",
     "publisher": "poetries",
@@ -185,6 +185,10 @@
                         {
                             "title": "产品经理知识整理",
                             "url": "https://www.yuque.com/weis/pm"
+                        },
+                        {
+                            "title": "v2ex话题",
+                            "url": "https://v2ex.now.sh/"
                         }
                     ],
                     "description": "收藏网址"
