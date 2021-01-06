@@ -34,6 +34,13 @@ class SettingTree {
                 icon:"icon_dashboard.svg",
                 url:"https://blog.poetries.top/archives/"
             },
+            {
+                title:"赞赏作者",
+                icon:"icon_pay.svg",
+                url:"",
+                view:"pay",
+                target:"default"
+            }
         ];
         var a_length = r_cates.length;
 

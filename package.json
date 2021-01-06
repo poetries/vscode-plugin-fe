@@ -2,7 +2,7 @@
     "name": "fe-tools",
     "displayName": "前端工具箱",
     "description": "把面试题、常用工具装进vscode里",
-    "version": "0.0.7",
+    "version": "0.0.9",
     "icon": "resources/icon.png",
     "license": "GPL",
     "publisher": "poetries",
@@ -189,6 +189,10 @@
                         {
                             "title": "v2ex话题",
                             "url": "https://v2ex.now.sh/"
+                        },
+                        {
+                            "title": "Github Trending",
+                            "url": "https://github.com/trending"
                         }
                     ],
                     "description": "收藏网址"
