@@ -131,8 +131,9 @@ function openInWebview(params) {
 
 	var webViewPanel = webViewStorage[target].panel;
 
-	// 每次都打开新tab
-	if(true || !webViewPanel){
+	// 每次都打开新tab置为true
+	// if(true || !webViewPanel){
+	if(!webViewPanel){
 		webViewPanel = vscode.window.createWebviewPanel(
 			'webview', // viewType
 			'', // 视图标题
