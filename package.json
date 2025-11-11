@@ -1,8 +1,8 @@
 {
     "name": "fe-tools",
-    "displayName": "前端工具箱",
-    "description": "把面试题、常用工具装进vscode里",
-    "version": "1.0.0",
+    "displayName": "前端进阶之旅",
+    "description": "前端面试指南宝典、前端人常用的工具箱",
+    "version": "1.0.8",
     "icon": "resources/icon.png",
     "license": "GPL",
     "publisher": "poetries",
@@ -10,27 +10,15 @@
         "url": "https://github.com/poetries/vscode-plugin-fe.git"
     },
     "keywords": [
-        "interview",
-        "面试",
-        "前端面试",
-        "前端",
-        "前端开发",
-        "fe",
-        "front end",
-        "面试题",
-        "前端学习",
-        "工具",
+        "前端面试宝典",
+        "前端面试指南",
+        "前端面试之旅",
+        "前端进阶之旅",
+        "前端工具箱",
+        "feinterview",
+        "frontend",
         "工具箱",
-        "博客",
-        "公众号",
-        "职场",
-        "求职",
-        "boss",
-        "node",
-        "taro",
-        "webpack",
-        "nginx",
-        "RSS"
+        "前端求职"
     ],
     "engines": {
         "vscode": "^1.35.0"
@@ -40,12 +28,10 @@
     ],
     "activationEvents": [
         "onView:feinterview_site",
-        "onView:feinterview_blog",
         "onView:feinterview_tools",
         "onView:feinterview_docs",
-        "onView:feinterview_boss",
-        "onView:feinterview_topic",
-        "onView:feinterview_question",
+        "onView:feinterview_blog",
+        "onView:feinterview_weapparticle",
         "onView:feinterview_collect",
         "onView:feinterview_setting"
     ],
@@ -56,6 +42,11 @@
                 "command": "feinterview.addTools",
                 "title": "更多工具",
                 "icon": "resources/icon_appadd.svg"
+            },
+            {
+                "command": "feinterview.viewAllWeappArticle",
+                "title": "查看全部",
+                "icon": "resources/icon_view.svg"
             },
             {
                 "command": "feinterview.refreshTopic",
@@ -88,7 +79,7 @@
             "activitybar": [
                 {
                     "id": "feinterview",
-                    "title": "前端工具箱",
+                    "title": "前端进阶之旅",
                     "icon": "resources/icon_fe.svg"
                 }
             ]
@@ -104,20 +95,16 @@
                     "name": "文档查询"
                 },
                 {
-                    "id": "feinterview_boss",
-                    "name": "前端面试"
-                },
-                {
-                    "id": "feinterview_topic",
-                    "name": "热门话题"
-                },
-                {
-                    "id": "feinterview_question",
-                    "name": "职场问题"
-                },
-                {
                     "id": "feinterview_tools",
                     "name": "常用工具"
+                },
+                               {
+                    "id": "feinterview_weapparticle",
+                    "name": "文章动态"
+                },
+                {
+                    "id": "feinterview_blog",
+                    "name": "前端资讯"
                 },
                 {
                     "id": "feinterview_collect",
@@ -137,13 +124,8 @@
                     "group": "navigation@1"
                 },
                 {
-                    "command": "feinterview.refreshTopic",
-                    "when": "view == feinterview_topic",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "feinterview.refreshQuestion",
-                    "when": "view == feinterview_question",
+                    "command": "feinterview.viewAllWeappArticle",
+                    "when": "view == feinterview_weapparticle",
                     "group": "navigation@1"
                 },
                 {
@@ -171,16 +153,12 @@
                     "type": "array",
                     "default": [
                         {
-                            "title": "Web 技术周刊",
-                            "url": "https://www.yuque.com/awesome/fe_weekly"
+                            "title": "前端进阶之旅",
+                            "url": "https://feinterview.poetries.top"
                         },
                         {
-                            "title": "科技爱好者周刊",
-                            "url": "https://www.yuque.com/ruanyf/weekly"
-                        },
-                        {
-                            "title": "产品经理知识整理",
-                            "url": "https://www.yuque.com/weis/pm"
+                            "title": "阮一峰科技爱好者周刊",
+                            "url": "https://github.com/ruanyf/weekly/issues"
                         }
                     ],
                     "description": "收藏网址"

@@ -9,6 +9,7 @@ const ToolsTree = require("./src/toolsTree");
 const BossTree = require("./src/bossTree");
 const TopicTree = require("./src/topicTree");
 const QuestionTree = require("./src/questionTree");
+const WeappArticleTree = require('././src/weappArticleTree')
 const DocsTree = require("./src/docsTree");
 const CollectTree = require("./src/collectTree");
 const SettingTree = require("./src/settingTree");
@@ -36,16 +37,18 @@ function activate(ctx) {
 	// The commandId parameter must match the command field in package.json
 	vscode.window.registerTreeDataProvider("feinterview_site", new CategoryTree(context));
 	vscode.window.registerTreeDataProvider("feinterview_setting", new SettingTree(context));
-	vscode.window.registerTreeDataProvider("feinterview_blog", new BlogTree(context));
 	vscode.window.registerTreeDataProvider("feinterview_tools", new ToolsTree(context));
-	vscode.window.registerTreeDataProvider("feinterview_boss", new BossTree(context));
+	vscode.window.registerTreeDataProvider("feinterview_blog", new BlogTree(context));
+	// vscode.window.registerTreeDataProvider("feinterview_boss", new BossTree(context));
 	vscode.window.registerTreeDataProvider("feinterview_docs", new DocsTree(context));
 	const collectTree = new CollectTree(context)
-	const topicTree = new TopicTree(context)
-	const questionTree = new QuestionTree(context)
+	// const topicTree = new TopicTree(context)
+	const weappArticleTree = new WeappArticleTree(context)
+	// const questionTree = new QuestionTree(context)
 	vscode.window.registerTreeDataProvider("feinterview_collect", collectTree);
-	vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
-	vscode.window.registerTreeDataProvider("feinterview_question", questionTree);
+	// vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
+	vscode.window.registerTreeDataProvider("feinterview_weapparticle", weappArticleTree);
+	// vscode.window.registerTreeDataProvider("feinterview_question", questionTree);
 
 	globalState.events.addListener('refresh-view', (type) => {
 		console.log(type,'----type----')
@@ -59,16 +62,20 @@ function activate(ctx) {
 			console.log('addTools');
 			vscode.env.openExternal("https://github.com/poetries/mywiki/tree/master/bookmark");
 		}),
-		vscode.commands.registerCommand('feinterview.refreshTopic', function () {
-			console.log('refresh');
-			topicTree.refresh();
-			vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
+		vscode.commands.registerCommand('feinterview.viewAllWeappArticle', function () {
+			console.log('viewAllWeappArticle');
+			vscode.env.openExternal("https://feinterview.poetries.top/wx-article");
 		}),
-		vscode.commands.registerCommand('feinterview.refreshQuestion', function () {
-			console.log('refresh');
-			questionTree.refresh();
-			vscode.window.registerTreeDataProvider("feinterview_question", questionTree);
-		}),
+		// vscode.commands.registerCommand('feinterview.refreshTopic', function () {
+		// 	console.log('refresh');
+		// 	topicTree.refresh();
+		// 	vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
+		// }),
+		// vscode.commands.registerCommand('feinterview.refreshQuestion', function () {
+		// 	console.log('refresh');
+		// 	questionTree.refresh();
+		// 	vscode.window.registerTreeDataProvider("feinterview_question", questionTree);
+		// }),
 		vscode.commands.registerCommand('feinterview.openSite', openInWebview),
 		vscode.commands.registerCommand('feinterview.deleteCollect', ({id})=> {
 			BaseConfig.removeConfig('frontend-box.markbook', id).then(() => {
@@ -117,6 +124,20 @@ function openInWebview(params) {
 	console.log('feinterview.openSite:' + JSON.stringify(params));
 	// Display a message box to the user
 
+	// 接口埋点
+	axios.get('https://api.poetries.top/api/common/reportLog',{
+		params: {
+			logType:'vscode_fe_plugin',
+			logDesc: "来自vscode插件内点击：" + params.title
+		}
+	})
+	.then(res=>{
+		console.log('接口埋点成功', res)
+	})
+	.catch(error=>{
+		console.log('接口埋点error', error)
+	})
+
 	if(params.openType == 'openExternal') {
 		vscode.env.openExternal(params.url);
 		return
@@ -132,8 +153,8 @@ function openInWebview(params) {
 	var webViewPanel = webViewStorage[target].panel;
 
 	// 每次都打开新tab置为true
-	// if(true || !webViewPanel){
-	if(!webViewPanel){
+	if(true || !webViewPanel){
+	// if(!webViewPanel){
 		webViewPanel = vscode.window.createWebviewPanel(
 			'webview', // viewType
 			'', // 视图标题
@@ -168,7 +189,7 @@ function openInWebview(params) {
 						break;
 					case 'request':
 						console.log("ready to request from weview");
-						console.log(message.params);
+						console.log('请求参数',message.params);
 						axios.request({
 							url:message.params.url,
 							method:message.params.method||'GET',

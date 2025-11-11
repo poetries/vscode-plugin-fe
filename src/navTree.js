@@ -19,7 +19,7 @@ class CategoryTree {
         var timestamp = new Date().getTime();
         if(!lastTimestamp||timestamp-lastTimestamp>3600000){
             lastTimestamp=timestamp;
-            const res = await axios.get("http://poetries1.gitee.io/vscode-plugin-fe-tools/nav.json");
+            const res = await axios.get("http://interview.poetries.top/vscode-plugin-fe-tools-json/nav.json");
             r_data = res.data;
         }else{
             console.log("use cached");

@@ -32,14 +32,7 @@ class SettingTree {
             {
                 title:"博客主页",
                 icon:"icon_dashboard.svg",
-                url:"https://blog.poetries.top/archives/"
-            },
-            {
-                title:"赞赏作者",
-                icon:"icon_pay.svg",
-                url:"",
-                view:"pay",
-                target:"default"
+                url:"https://feinterview.poetries.top/blog"
             }
         ];
         var a_length = r_cates.length;

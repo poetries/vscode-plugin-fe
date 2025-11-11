@@ -22,7 +22,7 @@ class ToolsTree {
         var timestamp = new Date().getTime();
         if(!lastTimestamp||timestamp-lastTimestamp>3600000){
             lastTimestamp=timestamp;
-            const res = await axios.get("http://poetries1.gitee.io/vscode-plugin-fe-tools/tools.json");
+            const res = await axios.get("http://interview.poetries.top/vscode-plugin-fe-tools-json/tools.json");
             r_tools = res.data;
         }else{
             console.log("use cached");
@@ -33,7 +33,7 @@ class ToolsTree {
         
         for(var i = 0;i<a_length;i++){
             var item = r_tools[i];
-            item.view = "tool";
+            // item.view = "default";
             fin_items.push(
                 new DataItem(
                     item.title,

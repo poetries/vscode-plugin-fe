@@ -1,3 +1,4 @@
+
 const vscode = require('vscode');
 const os = require('os');
 const path = require('path');
@@ -21,7 +22,7 @@ class questionTree {
         return element;
     }
     async getChildren(element) {
-        const {data: {zpData:{list,hasMore}}} = await axios.get(`https://www.zhipin.com/wapi/moment/get/question/wait2AnswerList?page=${this.page}&pageSize=30`);
+        const {data: {zpData:{list,hasMore}}} = await axios.get(`http://boss-interview.poetries.top/wapi/moment/get/question/wait2AnswerList?page=${this.page}&pageSize=30`);
         r_data = list;
         if(!hasMore) {
             this.page = 1

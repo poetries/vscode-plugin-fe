@@ -1,3 +1,4 @@
+
 const vscode = require('vscode');
 const os = require('os');
 const path = require('path');
@@ -21,7 +22,7 @@ class TopicTree {
         return element;
     }
     async getChildren(element) {
-        const {data: {zpData:{topicList,hasMore}}} = await axios.get(`https://www.zhipin.com/wapi/moment/discover/recHotTopic?page=${this.page}`);
+        const {data: {zpData:{topicList,hasMore}}} = await axios.get(`http://boss-interview.poetries.top/wapi/moment/discover/recHotTopic?page=${this.page}`);
         r_data = topicList;
         if(!hasMore) {
             this.page = 1
