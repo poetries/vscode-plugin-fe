@@ -11,6 +11,6 @@
 - 内置常见**面试题库**
 - 常用工具箱及开发文档
 
-![](https://s.poetries.top/gitee/2020/12/screenshot.png)
+![](https://s.poetries.top/uploads/2025/11/c4eadf551d997621.png)
 
 Enjoy!

@@ -1,8 +1,8 @@
 {
     "name": "fe-tools",
     "displayName": "前端进阶之旅",
-    "description": "前端面试指南宝典、前端人常用的工具箱",
-    "version": "1.0.9",
+    "description": "前端面试刷题神器，前端面试指南宝典、前端人常用的工具箱",
+    "version": "1.1.0",
     "icon": "resources/icon.png",
     "license": "GPL",
     "publisher": "poetries",
