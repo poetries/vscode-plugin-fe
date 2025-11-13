@@ -2,7 +2,7 @@
     "name": "fe-tools",
     "displayName": "前端进阶之旅",
     "description": "前端面试指南宝典、前端人常用的工具箱",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "icon": "resources/icon.png",
     "license": "GPL",
     "publisher": "poetries",
@@ -32,6 +32,7 @@
         "onView:feinterview_docs",
         "onView:feinterview_blog",
         "onView:feinterview_weapparticle",
+        "onView:feinterview_urlNav",
         "onView:feinterview_collect",
         "onView:feinterview_setting"
     ],
@@ -45,7 +46,12 @@
             },
             {
                 "command": "feinterview.viewAllWeappArticle",
-                "title": "查看全部",
+                "title": "查看全部文章",
+                "icon": "resources/icon_view.svg"
+            },
+            {
+                "command": "feinterview.viewAllUrlNav",
+                "title": "查看全部网址",
                 "icon": "resources/icon_view.svg"
             },
             {
@@ -91,16 +97,20 @@
                     "name": "快捷导航"
                 },
                 {
+                    "id": "feinterview_urlNav",
+                    "name": "网址导航动态"
+                },
+                {
+                    "id": "feinterview_weapparticle",
+                    "name": "公众号推文动态"
+                },
+                {
                     "id": "feinterview_docs",
                     "name": "文档查询"
                 },
                 {
                     "id": "feinterview_tools",
-                    "name": "常用工具"
-                },
-                               {
-                    "id": "feinterview_weapparticle",
-                    "name": "文章动态"
+                    "name": "常用工具箱"
                 },
                 {
                     "id": "feinterview_blog",
@@ -126,6 +136,11 @@
                 {
                     "command": "feinterview.viewAllWeappArticle",
                     "when": "view == feinterview_weapparticle",
+                    "group": "navigation@1"
+                },
+                {
+                    "command": "feinterview.viewAllUrlNav",
+                    "when": "view == feinterview_urlNav",
                     "group": "navigation@1"
                 },
                 {

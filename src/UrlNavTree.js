@@ -6,7 +6,7 @@ const axios = require("axios");
 
 var lastTimestamp;
 var r_data;
-class weappArticleTree {
+class urlNavTree {
     constructor(context){
         this.context = context;
         this.page = 1
@@ -22,7 +22,7 @@ class weappArticleTree {
         return element;
     }
     async getChildren(element) {
-        const res = await axios.get(`https://api.poetries.top/api/interview/article/list?pageNum=1&pageSize=1000&categoryId=`);
+        const res = await axios.get(`https://api.poetries.top/api/fenav/list?pageNum=1&pageSize=1000&categoryId=`);
         const list = res.data && res.data.data && res.data.data.list || []
         r_data = list.length ? list.filter(v=>v.title && v.url) : []
         if(!r_data)r_data=[];
@@ -33,15 +33,15 @@ class weappArticleTree {
             item.title && fin_items.push(
                 new DataItem(
                     `${i+1}.${item.title}`,
-                    '',
+                    item.desc,
                     {
-                        command:"feinterview.openSite",title: item.title,arguments:[{url: `https://feinterview.poetries.top/wx-article/${item.msgid}`,title:item.title,icon: 'icon_boss.svg',openType: "openExternal"}]
+                        command:"feinterview.openSite",title: item.title,arguments:[{url: `https://feinterview.poetries.top/nav/${item._id}`,title:item.title,icon: 'icon_nav.svg',openType: "openExternal"}]
                     }
                 )
             );
         }
 
-        return fin_items;
+        return fin_items
     }
 }
 
@@ -49,9 +49,9 @@ class DataItem extends vscode.TreeItem{
     constructor(label, tooltip, command) {
         super(label,  vscode.TreeItemCollapsibleState.None);
         this.tooltip = tooltip;
-        this.iconPath = path.join(__filename,'../../','resources', 'icon_boss.svg');
+        this.iconPath = path.join(__filename,'../../','resources', 'icon_nav.svg');
         this.command = command;
     }
 }
 
-module.exports = weappArticleTree;
+module.exports = urlNavTree;

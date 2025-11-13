@@ -10,6 +10,7 @@ const BossTree = require("./src/bossTree");
 const TopicTree = require("./src/topicTree");
 const QuestionTree = require("./src/questionTree");
 const WeappArticleTree = require('././src/weappArticleTree')
+const UrlNavTree = require('././src/urlNavTree')
 const DocsTree = require("./src/docsTree");
 const CollectTree = require("./src/collectTree");
 const SettingTree = require("./src/settingTree");
@@ -44,10 +45,12 @@ function activate(ctx) {
 	const collectTree = new CollectTree(context)
 	// const topicTree = new TopicTree(context)
 	const weappArticleTree = new WeappArticleTree(context)
+	const urlNavTree = new UrlNavTree(context)
 	// const questionTree = new QuestionTree(context)
 	vscode.window.registerTreeDataProvider("feinterview_collect", collectTree);
 	// vscode.window.registerTreeDataProvider("feinterview_topic", topicTree);
 	vscode.window.registerTreeDataProvider("feinterview_weapparticle", weappArticleTree);
+	vscode.window.registerTreeDataProvider("feinterview_urlNav", urlNavTree);
 	// vscode.window.registerTreeDataProvider("feinterview_question", questionTree);
 
 	globalState.events.addListener('refresh-view', (type) => {
@@ -60,11 +63,15 @@ function activate(ctx) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('feinterview.addTools', function () {
 			console.log('addTools');
-			vscode.env.openExternal("https://github.com/poetries/mywiki/tree/master/bookmark");
+			vscode.env.openExternal("https://feinterview.poetries.top/nav");
 		}),
 		vscode.commands.registerCommand('feinterview.viewAllWeappArticle', function () {
 			console.log('viewAllWeappArticle');
 			vscode.env.openExternal("https://feinterview.poetries.top/wx-article");
+		}),
+		vscode.commands.registerCommand('feinterview.viewAllUrlNav', function () {
+			console.log('viewAllUrlNav');
+			vscode.env.openExternal("https://feinterview.poetries.top/nav");
 		}),
 		// vscode.commands.registerCommand('feinterview.refreshTopic', function () {
 		// 	console.log('refresh');
